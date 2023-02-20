@@ -79,6 +79,7 @@ function App() {
     console.log(`model: ${endpoint}_model`);
     console.log(models[`${endpoint}_model`]);
     setFormOptions(models[`${endpoint}_model`].properties || {});
+    setDownloadUrl(null);
   };
 
   const handleOptionChange = (event) => {
