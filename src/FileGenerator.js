@@ -2,6 +2,9 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Grid, Link, List, ListItemButton, ListItemText, TextField, Typography, Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import Item from '@mui/material/Grid';
 import axios from "axios";
 
@@ -15,6 +18,7 @@ function App() {
 
   const apiUrl = process.env.REACT_APP_API_URL;
   const [loading, setLoading] = useState(true);
+  const [inProgress, setInProgress] = useState(false);
   const [endpoints, setEndpoints] = useState(null);
   const [selectedEndpoint, setSelectedEndpoint] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
@@ -26,7 +30,6 @@ function App() {
 
   useEffect(() => {
     const fetchEndpoints = async () => {
-      // const response = await fetch(`${apiUrl}/openapi.json`);
       const response = await axios.get(`${apiUrl}/openapi.json`, {
         retry: {
           retries: 10,
@@ -45,17 +48,13 @@ function App() {
         return acc;
       }, {});
       setEndpoints(endpoints);
-      console.log("ENDPOINTS");
-      {endpoints &&
-              Object.keys(endpoints).map((endpoint) => {
-                  console.log(endpoint);
-                  console.log(endpoints[endpoint]);
-              })}
+      console.log('ENDPOINTS');
+      console.log(endpoints);
 
       const models = schema.components.schemas;
       setModels(models);
       setLoading(false);
-      console.log("MODELS");
+      console.log('MODELS');
       console.log(models);
     };
     fetchEndpoints();
@@ -90,25 +89,38 @@ function App() {
   };
 
   const handleSubmit = async () => {
+    setInProgress(true);
+    const body = JSON.stringify(Object.fromEntries(
+      Object.entries(formOptions).map(([name, value]) => {
+        if (name === 'data_columns' && typeof value === 'string') {
+          value = value.split(',').map(str => str.trim())
+        }
+        return [name, value]
+      })
+    ));
+    console.log('body');
+    console.log(body);
     const response = await fetch(`${apiUrl}/${selectedEndpoint}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(Object.fromEntries(
-        Object.entries(formOptions)
-          .filter(([name, value]) => value !== undefined)
-      )),
+      body: body,
     });
     const blob = await response.blob();
     const downloadUrl = window.URL.createObjectURL(blob);
     setDownloadUrl(downloadUrl);
+    setInProgress(false);
   };
 
   const theme = createTheme();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (
@@ -141,32 +153,40 @@ function App() {
           <Item sx={{py: 2, px: 2}}>
             <Typography variant="h4" component="h1" gutterBottom>Options</Typography>
             {selectedEndpoint && endpoints && (
-              <form>
-                {Object.entries(models[selectedModel].properties || {}).map(([name, property]) => {
-                  const inputProps = {
-                    style: {height: 'auto'}
-                  };
-                  const props = (multilines.includes(name)) ? {multiline: true, rows: 4, maxRows: 20, inputProps} : {};
-                  const key = `${selectedModel}_${name}`;
+              <div>
+                <form>
+                  {Object.entries(models[selectedModel].properties || {}).map(([name, property]) => {
+                    const inputProps = {
+                      style: {height: 'auto'}
+                    };
+                    const props = (multilines.includes(name)) ? {multiline: true, rows: 4, maxRows: 20, inputProps} : {};
+                    const key = `${selectedModel}_${name}`;
 
-                  return (
-                    <TextField
-                      key={key}
-                      name={name}
-                      label={name}
-                      defaultValue={property.default || null}
-                      fullWidth
-                      margin="normal"
-                      variant="outlined"
-                      onChange={handleOptionChange}
-                      {...props}
-                    />
-                  );
-                })}
-                <Button variant="contained" color="primary" onClick={handleSubmit}>
-                  Generate
-                </Button>
-              </form>
+                    return (
+                      <TextField
+                        key={key}
+                        name={name}
+                        label={name}
+                        defaultValue={property.default || null}
+                        fullWidth
+                        margin="normal"
+                        variant="outlined"
+                        onChange={handleOptionChange}
+                        {...props}
+                      />
+                    );
+                  })}
+                  <Button variant="contained" color="primary" onClick={handleSubmit}>
+                    Generate
+                  </Button>
+                </form>
+                <Backdrop
+                  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                  open={inProgress}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+              </div>
             )}
           </Item>
         </Grid>
@@ -181,7 +201,6 @@ function App() {
           </Item>
         </Grid>
       </Grid>
-
     </ThemeProvider>
   );
 }
