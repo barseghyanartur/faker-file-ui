@@ -102,7 +102,13 @@ function App() {
       Object.entries(formOptions).map(([name, value]) => {
         if (name === 'data_columns' && typeof value === 'string') {
           value = value.split(',').map(str => str.trim())
+        } else if (name === 'options' && typeof value === 'string' && value.trim() !== "") {
+          value = JSON.parse(value);
         }
+        console.log('name');
+        console.log(name);
+        console.log('value');
+        console.log(value);
         return [name, value];
       })
     ));
