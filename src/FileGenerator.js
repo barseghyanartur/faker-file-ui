@@ -7,6 +7,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import Item from '@mui/material/Grid';
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 function App() {
   if (process.env.NODE_ENV === 'production') {
@@ -28,14 +29,21 @@ function App() {
   const [models, setModels] = useState(null);
   const multilines = ['content', 'options']; // Multi-line fields
 
+  axiosRetry(axios, {
+    retries: 10,
+    retryDelay: (retryCount) => {
+      console.log('retryCount');
+      console.log(retryCount);
+      return retryCount * 1000;
+    }
+  });
+
   useEffect(() => {
     const fetchEndpoints = async () => {
       const response = await axios.get(`${apiUrl}/openapi.json`, {
         retry: {
           retries: 10,
-          retryDelay: (retryCount) => {
-            return retryCount * 1000;
-          }
+
         }
       });
       const schema = response.data;
@@ -95,7 +103,7 @@ function App() {
         if (name === 'data_columns' && typeof value === 'string') {
           value = value.split(',').map(str => str.trim())
         }
-        return [name, value]
+        return [name, value];
       })
     ));
     console.log('body');
@@ -117,9 +125,11 @@ function App() {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex' }}>
-        <CircularProgress />
-      </Box>
+      <ThemeProvider theme={theme}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <CircularProgress size={200} />
+        </Box>
+      </ThemeProvider>
     );
   }
 
