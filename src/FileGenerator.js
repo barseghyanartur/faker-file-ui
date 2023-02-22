@@ -44,7 +44,7 @@ function App() {
     const fetchEndpoints = async () => {
       const response = await axios.get(`${apiUrl}/openapi.json`, {
         retry: {
-          retries: 10,
+          retries: 20,
 
         }
       });
