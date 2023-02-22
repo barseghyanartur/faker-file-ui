@@ -20,7 +20,6 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "swagger-parser": "^10.0.3",
-    "react-jsonschema-form": "^1.8.1",
     "yup": "^1.0.0",
     "react-hook-form": "^7.43.1",
     "axios": "^1.3.3",

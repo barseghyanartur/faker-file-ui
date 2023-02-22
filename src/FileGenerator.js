@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { Grid, Link, List, ListItemButton, ListItemText, TextField, Typography, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
@@ -90,9 +92,15 @@ function App() {
   };
 
   const handleOptionChange = (event) => {
+    const { name, value, checked } = event.target;
+    console.log(models[selectedModel].properties);
+    console.log(name);
+    console.log(models[selectedModel].properties[name]);
+    console.log("checked");
+    console.log(checked);
     setFormOptions((prevOptions) => ({
       ...prevOptions,
-      [event.target.name]: event.target.value,
+      [name]: models[selectedModel].properties[name].type === 'boolean' ? checked : value,
     }));
   };
 
@@ -103,7 +111,13 @@ function App() {
         if (name === 'data_columns' && typeof value === 'string') {
           value = value.split(',').map(str => str.trim())
         } else if (name === 'options' && typeof value === 'string' && value.trim() !== "") {
-          value = JSON.parse(value);
+          try {
+            value = JSON.parse(value);
+          } catch(e) {
+            console.log('invalid value');
+            console.log(value);
+            value = null;
+          }
         }
         console.log('name');
         console.log(name);
@@ -177,20 +191,39 @@ function App() {
                     };
                     const props = (multilines.includes(name)) ? {multiline: true, rows: 4, maxRows: 20, inputProps} : {};
                     const key = `${selectedModel}_${name}`;
-
-                    return (
-                      <TextField
-                        key={key}
-                        name={name}
-                        label={name}
-                        defaultValue={property.default || null}
-                        fullWidth
-                        margin="normal"
-                        variant="outlined"
-                        onChange={handleOptionChange}
-                        {...props}
-                      />
-                    );
+                    if (property.type === 'boolean') {
+                      return (
+                        <FormControlLabel
+                          key={key}
+                          control={
+                            <Checkbox
+                              name={name}
+                              label={name}
+                              checked={formOptions[name] || property.default || false}
+                              margin="normal"
+                              variant="outlined"
+                              onChange={handleOptionChange}
+                              {...props}
+                            />
+                          }
+                          label={property.title || name}
+                        />
+                      );
+                    } else {
+                      return (
+                        <TextField
+                            key={key}
+                            name={name}
+                            label={property.title || name}
+                            defaultValue={property.default || null}
+                            fullWidth
+                            margin="normal"
+                            variant="outlined"
+                            onChange={handleOptionChange}
+                            {...props}
+                        />
+                      );
+                    }
                   })}
                   <Button variant="contained" color="primary" onClick={handleSubmit}>
                     Generate
