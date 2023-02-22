@@ -1,6 +1,7 @@
 ===============
 `faker-file-ui`
 ===============
+.. _faker-file: https://github.com/barseghyanartur/faker-file
 .. _faker-file-api: https://github.com/barseghyanartur/faker-file-api
 .. _ReactJS: https://reactjs.org/
 .. _MaterialUI: https://mui.com/material-ui/
@@ -30,7 +31,7 @@ How it is supposed to work?
 ===========================
 The wizard
 ----------
-Three column design
+Three column design:
 
 .. code-block:: text
 
@@ -38,23 +39,39 @@ Three column design
     | --------------------- | --------------------- | --------------------- |
     |  - bin                | prefix ______________ | -> Download           |
     |  - csv                | max_nb_chars ________ |                       |
-    |  -> docx              | content _____________ |                       |
-    |  ...                  |                       |                       |
-    |  - zip                | -> Generate           |                       |
-    |                       |                       |                       |
+    |  -> docx              | wrap_chars_after ____ |                       |
+    |  - eml                | content _____________ |                       |
+    |  - epub               |                       |                       |
+    |  - ico                | -> Generate           |                       |
+    |  - jpeg               |                       |                       |
+    |  - mp3                |                       |                       |
+    |  - odp                |                       |                       |
+    |  - ods                |                       |                       |
+    |  - odt                |                       |                       |
+    |  - pdf                |                       |                       |
+    |  - png                |                       |                       |
+    |  - pptx               |                       |                       |
+    |  - rtf                |                       |                       |
+    |  - svg                |                       |                       |
+    |  - tar                |                       |                       |
+    |  - txt                |                       |                       |
+    |  - webp               |                       |                       |
+    |  - xlsx               |                       |                       |
+    |  - zip                |                       |                       |
 
-**Step 1: choose file type**
+**Step 1: Choose File type**
 
-- file type
+- File type
 
-**Step 2: fine tune the options (specific for each file type)**
+**Step 2: Fine tune the Options (specific for each File type)**
 
-- all options of faker-file should be supported, except for a very specific
-  ones, like `storage`.
+- All options of `faker-file`_ are be supported, except for a very specific
+  ones, like ``storage`` or ``mp3_generator_cls``.
 
-**Step 3: generate file**
+**Step 3: Generate file**
 
-- Clicking on generate button, should generate the file and stream it to you.
+- Clicking on ``Generate`` button, should generate the file and
+  render ``Download`` link in the ``Result`` column.
 
 Supported file types
 --------------------
@@ -79,7 +96,6 @@ Supported file types
 - ``WEBP``
 - ``XLSX``
 - ``ZIP``
-
 
 Writing documentation
 =====================
