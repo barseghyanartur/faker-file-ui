@@ -29,7 +29,7 @@ function App() {
   const [formOptions, setFormOptions] = useState({});
   const [downloadUrl, setDownloadUrl] = useState(null);
   const [models, setModels] = useState(null);
-  const multilines = ['content', 'options']; // Multi-line fields
+  const multilines = ['content', 'options', 'mp3_generator_kwargs', 'pdf_generator_kwargs']; // Multi-line fields
 
   axiosRetry(axios, {
     retries: 20,
