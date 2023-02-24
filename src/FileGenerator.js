@@ -32,7 +32,7 @@ function App() {
   const multilines = ['content', 'options']; // Multi-line fields
 
   axiosRetry(axios, {
-    retries: 10,
+    retries: 20,
     retryDelay: (retryCount) => {
       console.log('retryCount');
       console.log(retryCount);
@@ -45,7 +45,6 @@ function App() {
       const response = await axios.get(`${apiUrl}/openapi.json`, {
         retry: {
           retries: 20,
-
         }
       });
       const schema = response.data;
@@ -108,9 +107,9 @@ function App() {
     setInProgress(true);
     const body = JSON.stringify(Object.fromEntries(
       Object.entries(formOptions).map(([name, value]) => {
-        if (name === 'data_columns' && typeof value === 'string') {
+        if (['data_columns'].includes(name) && typeof value === 'string') {
           value = value.split(',').map(str => str.trim())
-        } else if (name === 'options' && typeof value === 'string' && value.trim() !== "") {
+        } else if (['options', 'mp3_generator_kwargs', 'pdf_generator_kwargs'].includes(name) && typeof value === 'string' && value.trim() !== "") {
           try {
             value = JSON.parse(value);
           } catch(e) {
@@ -123,6 +122,9 @@ function App() {
         console.log(name);
         console.log('value');
         console.log(value);
+        if (value && value.trim() === '') {
+          value = null;
+        }
         return [name, value];
       })
     ));
