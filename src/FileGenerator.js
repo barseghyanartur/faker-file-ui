@@ -29,6 +29,7 @@ function App() {
   const [formOptions, setFormOptions] = useState({});
   const [downloadUrl, setDownloadUrl] = useState(null);
   const [models, setModels] = useState(null);
+  const [filename, setFilename] = useState(null);
   const multilines = ['content', 'options', 'mp3_generator_kwargs', 'pdf_generator_kwargs']; // Multi-line fields
 
   axiosRetry(axios, {
@@ -88,6 +89,7 @@ function App() {
     console.log(models[`${endpoint}_model`]);
     setFormOptions(models[`${endpoint}_model`].properties || {});
     setDownloadUrl(null);
+    setFilename(null);
   };
 
   const handleOptionChange = (event) => {
@@ -138,9 +140,30 @@ function App() {
       body: body,
     });
     const blob = await response.blob();
+    console.log('response');
+    console.log(response);
     const downloadUrl = window.URL.createObjectURL(blob);
     setDownloadUrl(downloadUrl);
     setInProgress(false);
+
+    // Get the content-disposition header
+    const contentDisposition = response.headers.get('content-disposition');
+    console.log(contentDisposition);
+
+    // Extract the 'filename' value
+    const match = /filename=([^;]+)/.exec(contentDisposition);
+    console.log(match);
+
+    let filename;
+    if (match && match.length > 1) {
+      filename = match[1];
+      setFilename(filename);
+    } else {
+      setFilename(`${selectedEndpoint}.${selectedFileExtension}`);
+    }
+    console.log('filename');
+    console.log(filename);
+
   };
 
   const theme = createTheme();
@@ -245,7 +268,7 @@ function App() {
           <Item sx={{py: 2, px: 2}}>
             <Typography variant="h4" component="h1" gutterBottom>Result</Typography>
             {downloadUrl && (
-              <Link href={downloadUrl} download={`${selectedEndpoint}.${selectedFileExtension}`}>
+              <Link href={downloadUrl} download={`${filename}`}>
                 Download
               </Link>
             )}
