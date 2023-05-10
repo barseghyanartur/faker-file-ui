@@ -110,7 +110,11 @@ function App() {
     const body = JSON.stringify(Object.fromEntries(
       Object.entries(formOptions).map(([name, value]) => {
         if (['data_columns'].includes(name) && typeof value === 'string') {
-          value = value.split(',').map(str => str.trim())
+          if (['csv_file'].includes(selectedModel)) {
+            value = value.split(',').map(str => str.trim())
+          } else {
+            value = JSON.parse(value);
+          }
         } else if (['options', 'mp3_generator_kwargs', 'pdf_generator_kwargs'].includes(name) && typeof value === 'string' && value.trim() !== "") {
           try {
             value = JSON.parse(value);
@@ -124,7 +128,7 @@ function App() {
         console.log(name);
         console.log('value');
         console.log(value);
-        if (value && value.trim() === '') {
+        if (value && value.constructor === String && value.trim() === '') {
           value = null;
         }
         return [name, value];
