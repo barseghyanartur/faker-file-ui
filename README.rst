@@ -37,11 +37,13 @@ Three column design:
 
     | File type             | Options               | Result                |
     | --------------------- | --------------------- | --------------------- |
-    |  - bin                | prefix ______________ | -> Download           |
-    |  - csv                | max_nb_chars ________ |                       |
-    |  -> docx              | wrap_chars_after ____ |                       |
-    |  - eml                | content _____________ |                       |
+    |  - bin                | basename ____________ | -> Download           |
+    |  - csv                | prefix ______________ |                       |
+    |  -> docx              | max_nb_chars ________ |                       |
+    |  - eml                | wrap_chars_after ____ |                       |
+    |  - epub               | content _____________ |                       |
     |  - epub               |                       |                       |
+    |  - generic            |                       |                       |
     |  - ico                | -> Generate           |                       |
     |  - jpeg               |                       |                       |
     |  - mp3                |                       |                       |
@@ -57,6 +59,7 @@ Three column design:
     |  - txt                |                       |                       |
     |  - webp               |                       |                       |
     |  - xlsx               |                       |                       |
+    |  - xml                |                       |                       |
     |  - zip                |                       |                       |
 
 **Step 1: Choose File type**
@@ -66,7 +69,7 @@ Three column design:
 **Step 2: Fine tune the Options (specific for each File type)**
 
 - All options of `faker-file`_ are be supported, except for a very specific
-  ones, like ``storage`` or ``mp3_generator_cls``.
+  ones, such as ``storage``.
 
 **Step 3: Generate file**
 
@@ -95,6 +98,7 @@ Supported file types
 - ``TXT``
 - ``WEBP``
 - ``XLSX``
+- ``XML``
 - ``ZIP``
 
 Writing documentation
