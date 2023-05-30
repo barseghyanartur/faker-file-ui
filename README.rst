@@ -130,6 +130,20 @@ Keep the following hierarchy.
     sub-sub-sub-sub-sub-header
     **************************
 
+Testing
+=======
+Run all tests:
+
+.. code-block:: sh
+
+    npx cypress open
+
+Run all tests in headless mode:
+
+.. code-block:: sh
+
+    npx cypress run --headless
+
 License
 =======
 MIT
