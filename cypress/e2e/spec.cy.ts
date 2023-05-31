@@ -32,19 +32,18 @@ describe('Get JSON schema', () => {
 
 describe('Faker File UI', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000'); // replace with your app's URL
+    cy.visit('http://localhost:3000');
   });
 
   it('loads the endpoints and models on mount', () => {
     cy.intercept('GET', 'http://localhost:8000/openapi.json', { fixture: 'openapi.json' }).as('fetchEndpoints');
 
-    // make assertions about how your app should behave
+    // Wait until endpoints data is fetched
     cy.wait('@fetchEndpoints');
-    // Further assertions
+
+    // Check if all providers are available on the page
     elements.forEach(element => {
       cy.contains('span', element).should('be.visible');
     });
   });
-
-  // write more tests...
 });
