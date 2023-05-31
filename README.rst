@@ -132,6 +132,8 @@ Keep the following hierarchy.
 
 Testing
 =======
+Run test against running instance
+---------------------------------
 Run all tests:
 
 .. code-block:: sh
@@ -143,6 +145,20 @@ Run all tests in headless mode:
 .. code-block:: sh
 
     npx cypress run --headless
+
+Run test instance and tests
+---------------------------
+Run all tests:
+
+.. code-block:: sh
+
+    npm run cy:test
+
+Run all tests in headless mode:
+
+.. code-block:: sh
+
+    npm run cy:test-headless
 
 License
 =======

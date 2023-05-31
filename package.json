@@ -6,7 +6,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:run-headless": "cypress run --headless",
+    "cy:test-headless": "start-server-and-test start http://localhost:3000 cy:run-headless",
+    "cy:open": "cypress open",
+    "cy:test": "start-server-and-test start http://localhost:3000 cy:open"
   },
   "dependencies": {
     "@emotion/react": "latest",
@@ -27,7 +31,8 @@
   },
   "devDependencies": {
     "cypress": "^12.13.0",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "start-server-and-test": "^2.0.0"
   },
   "browserslist": {
     "production": [
