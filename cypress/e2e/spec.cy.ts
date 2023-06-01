@@ -24,6 +24,34 @@ const providers = {
   'zip': ['basename', 'prefix', 'options'],
 };
 
+const formValues = {
+  // This object should include values to fill in the form for each provider.
+  // Each key should be a provider name, and each value should be an object that has field names and values.
+  'bin': {'basename': 'test', 'length': 5},
+  'csv': {'basename': 'test', 'num_rows': 10},
+  'docx': {'basename': 'test', 'max_nb_chars': 10000},
+  'eml': {'basename': 'test', 'max_nb_chars': 10000},
+  'epub': {'basename': 'test', 'max_nb_chars': 10000},
+  'generic': {'basename': 'test', 'content': '<html><body>hello</body></html>', 'extension': 'html'},
+  'ico': {'basename': 'test', 'max_nb_chars': 5000},
+  'jpeg': {'basename': 'test', 'max_nb_chars': 5000},
+  'mp3': {'basename': 'test', 'max_nb_chars': 500, 'mp3_generator_cls': 'faker_file.providers.mp3_file.generators.gtts_generator.GttsMp3Generator'},
+  'odp': {'basename': 'test', 'max_nb_chars': 10000},
+  'ods': {'basename': 'test', 'num_rows': 10},
+  'odt': {'basename': 'test', 'max_nb_chars': 10000},
+  'pdf': {'basename': 'test', 'max_nb_chars': 10000, 'pdf_generator_cls': 'faker_file.providers.pdf_file.generators.pdfkit_generator.PdfkitPdfGenerator'},
+  'png': {'basename': 'test', 'max_nb_chars': 5000},
+  'pptx': {'basename': 'test', 'max_nb_chars': 10000},
+  'rtf': {'basename': 'test', 'max_nb_chars': 10000},
+  'svg': {'basename': 'test', 'max_nb_chars': 5000},
+  'tar': {'basename': 'test'},
+  'txt': {'basename': 'test', 'max_nb_chars': 10000},
+  'webp': {'basename': 'test', 'max_nb_chars': 5000},
+  'xlsx': {'basename': 'test', 'num_rows': 10},
+  'xml': {'basename': 'test', 'root_element': 'root', 'row_element': 'row', 'num_rows': 10},
+  'zip': {'basename': 'test'},
+};
+
 describe('Get JSON schema', () => {
   it('passes', () => {
     cy.intercept('GET', 'http://127.0.0.1:8000/openapi.json', { fixture: 'openapi.json' })
@@ -43,6 +71,54 @@ describe('Faker File UI', () => {
       fields.forEach((field) => {
         cy.get(`[name="${field}"]`).should('be.visible');
       });
+    });
+  });
+});
+
+
+describe('Submit form data and get file download link', () => {
+  Object.entries(providers).forEach(([provider, fields]) => {
+    it(`loads the form for ${provider}`, () => {
+      // Visit the site
+      cy.visit('http://127.0.0.1:3000');
+      cy.intercept('GET', 'http://127.0.0.1:8000/openapi.json', { fixture: 'openapi.json' }).as('fetchEndpoints');
+      cy.wait('@fetchEndpoints');
+
+      cy.contains('span', provider).click();
+      fields.forEach((field) => {
+        cy.get(`[name="${field}"]`).should('be.visible');
+      });
+
+      // Fill in the form and submit it
+      const values = formValues[provider];
+      for (let field in values) {
+        cy.get(`[name="${field}"]`).type(values[field]);
+      }
+
+      const extension = values['extension'] ? values['extension'] : provider;
+      cy.intercept(
+        'POST',
+        `http://127.0.0.1:8000/${provider}_file/`,
+        {
+          fixture: 'download.json',
+          headers: {
+            'Content-Disposition': `attachment; filename=test.${extension}`,
+          },
+        }
+      ).as('postRequest');
+
+      // Submit the form
+      cy.get('button').contains('Generate').click();
+
+      // Wait for the request to resolve
+      cy.wait('@postRequest', { timeout: 20000 });
+
+      // Assert that the download link has the correct href and download attributes
+      cy.get('a').contains('Download')
+        .should('have.attr', 'href')
+        .should('include', 'blob:');
+      cy.get('a').contains('Download')
+        .should('have.attr', 'download', `test.${extension}`);
     });
   });
 });
