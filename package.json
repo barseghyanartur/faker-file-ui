@@ -3,13 +3,14 @@
   "version": "5.0.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts -r @cypress/instrument-cra test",
     "eject": "react-scripts eject",
-    "cy:run-headless": "cypress run --headless",
+    "cy:coverage": "react-scripts test --coverage",
+    "cy:run-headless": "cypress run --headless --env coverage=true",
     "cy:test-headless": "start-server-and-test start http://127.0.0.1:3000 cy:run-headless",
-    "cy:open": "cypress open",
+    "cy:open": "cypress open --env coverage=true",
     "cy:test": "start-server-and-test start http://127.0.0.1:3000 cy:open"
   },
   "dependencies": {
@@ -30,7 +31,11 @@
     "yup": "^1.0.0"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.7",
+    "@cypress/instrument-cra": "^1.4.0",
     "cypress": "^12.13.0",
+    "cypress-real-events": "^1.8.1",
+    "istanbul-lib-coverage": "^3.2.0",
     "react-scripts": "latest",
     "start-server-and-test": "^2.0.0"
   },
