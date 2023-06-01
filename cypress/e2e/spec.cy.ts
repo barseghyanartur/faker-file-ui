@@ -26,14 +26,14 @@ const providers = {
 
 describe('Get JSON schema', () => {
   it('passes', () => {
-    cy.intercept('GET', 'http://localhost:8000/openapi.json', { fixture: 'openapi.json' })
+    cy.intercept('GET', 'http://127.0.0.1:8000/openapi.json', { fixture: 'openapi.json' })
   })
 })
 
 describe('Faker File UI', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
-    cy.intercept('GET', 'http://localhost:8000/openapi.json', { fixture: 'openapi.json' }).as('fetchEndpoints');
+    cy.visit('http://127.0.0.1:3000');
+    cy.intercept('GET', 'http://127.0.0.1:8000/openapi.json', { fixture: 'openapi.json' }).as('fetchEndpoints');
     cy.wait('@fetchEndpoints');
   });
 
