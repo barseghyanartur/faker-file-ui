@@ -132,7 +132,7 @@ Keep the following hierarchy.
 
 Testing
 =======
-Run test against running instance
+Run tests against running instance
 ---------------------------------
 Run all tests:
 
@@ -146,7 +146,7 @@ Run all tests in headless mode:
 
     npx cypress run --headless
 
-Run test instance and tests
+Run tests instance and tests
 ---------------------------
 Run all tests:
 
