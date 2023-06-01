@@ -8,9 +8,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cy:run-headless": "cypress run --headless",
-    "cy:test-headless": "start-server-and-test start http://localhost:3000 cy:run-headless",
+    "cy:test-headless": "start-server-and-test start http://127.0.0.1:3000 cy:run-headless",
     "cy:open": "cypress open",
-    "cy:test": "start-server-and-test start http://localhost:3000 cy:open"
+    "cy:test": "start-server-and-test start http://127.0.0.1:3000 cy:open"
   },
   "dependencies": {
     "@emotion/react": "latest",
