@@ -5,6 +5,9 @@
 install:
 	npm install
 
+run:
+	npm start
+
 # Run the tests
 test:
 	npm run cy:test-headless
