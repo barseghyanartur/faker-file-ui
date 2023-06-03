@@ -147,7 +147,7 @@ describe("Faker File UI", () => {
 
 describe("Submit form data and get file download link", () => {
   Object.entries(providers).forEach(([provider, fields]) => {
-    it(`loads the form for ${provider}`, () => {
+    it(`submits the form for ${provider}`, () => {
       // Visit the site
       cy.visit("http://127.0.0.1:3000");
       cy.intercept("GET", "http://127.0.0.1:8000/openapi.json", {
