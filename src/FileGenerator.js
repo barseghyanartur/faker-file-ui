@@ -17,6 +17,8 @@ import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Item from "@mui/material/Grid";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import axios from "axios";
 import axiosRetry from "axios-retry";
 
@@ -39,6 +41,8 @@ function App() {
   const [downloadUrl, setDownloadUrl] = useState(null);
   const [models, setModels] = useState(null);
   const [filename, setFilename] = useState(null);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const multilines = [
     "content",
     "data_columns",
@@ -128,77 +132,103 @@ function App() {
   };
 
   const handleSubmit = async () => {
-    setInProgress(true);
-    const body = JSON.stringify(
-      Object.fromEntries(
-        Object.entries(formOptions).map(([name, value]) => {
-          if (["data_columns"].includes(name) && typeof value === "string") {
-            if (["csv_file"].includes(selectedModel)) {
-              value = value.split(",").map((str) => str.trim());
-            } else {
-              value = JSON.parse(value);
+    try {
+      setInProgress(true);
+      const body = JSON.stringify(
+        Object.fromEntries(
+          Object.entries(formOptions).map(([name, value]) => {
+            if (["data_columns"].includes(name) && typeof value === "string") {
+              if (["csv_file"].includes(selectedModel)) {
+                value = value.split(",").map((str) => str.trim());
+              } else {
+                value = JSON.parse(value);
+              }
+            } else if (
+              [
+                "options",
+                "mp3_generator_kwargs",
+                "pdf_generator_kwargs",
+              ].includes(name) &&
+              typeof value === "string" &&
+              value.trim() !== ""
+            ) {
+              try {
+                value = JSON.parse(value);
+              } catch (e) {
+                console.log("invalid value");
+                console.log(value);
+                value = null;
+              }
             }
-          } else if (
-            [
-              "options",
-              "mp3_generator_kwargs",
-              "pdf_generator_kwargs",
-            ].includes(name) &&
-            typeof value === "string" &&
-            value.trim() !== ""
-          ) {
-            try {
-              value = JSON.parse(value);
-            } catch (e) {
-              console.log("invalid value");
-              console.log(value);
+            console.log("name");
+            console.log(name);
+            console.log("value");
+            console.log(value);
+            if (value && value.constructor === String && value.trim() === "") {
               value = null;
             }
-          }
-          console.log("name");
-          console.log(name);
-          console.log("value");
-          console.log(value);
-          if (value && value.constructor === String && value.trim() === "") {
-            value = null;
-          }
-          return [name, value];
-        })
-      )
-    );
-    console.log("body");
-    console.log(body);
-    const response = await fetch(`${apiUrl}/${selectedEndpoint}/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: body,
-    });
-    const blob = await response.blob();
-    console.log("response");
-    console.log(response);
-    const downloadUrl = window.URL.createObjectURL(blob);
-    setDownloadUrl(downloadUrl);
-    setInProgress(false);
+            return [name, value];
+          })
+        )
+      );
+      console.log("body");
+      console.log(body);
+      const response = await fetch(`${apiUrl}/${selectedEndpoint}/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
 
-    // Get the content-disposition header
-    const contentDisposition = response.headers.get("content-disposition");
-    console.log(contentDisposition);
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        console.error("Server responded with an error:", errorResponse);
+        // If errorResponse contains a message, use it. Otherwise use a default message
+        const _errorMessage = errorResponse.message || "An error occurred";
+        // Handle the error based on errorResponse here
+        setInProgress(false);
+        setErrorMessage(_errorMessage);
+        setShowError(true);
+        return;
+      }
 
-    // Extract the 'filename' value
-    const match = /filename=([^;]+)/.exec(contentDisposition);
-    console.log(match);
+      const blob = await response.blob();
+      console.log("response");
+      console.log(response);
+      const downloadUrl = window.URL.createObjectURL(blob);
+      setDownloadUrl(downloadUrl);
+      setInProgress(false);
 
-    let filename;
-    if (match && match.length > 1) {
-      filename = match[1];
-      setFilename(filename);
-    } else {
-      setFilename(`${selectedEndpoint}.${selectedFileExtension}`);
+      // Get the content-disposition header
+      const contentDisposition = response.headers.get("content-disposition");
+      console.log(contentDisposition);
+
+      // Extract the 'filename' value
+      const match = /filename=([^;]+)/.exec(contentDisposition);
+      console.log(match);
+
+      let filename;
+      if (match && match.length > 1) {
+        filename = match[1];
+        setFilename(filename);
+      } else {
+        setFilename(`${selectedEndpoint}.${selectedFileExtension}`);
+      }
+      console.log("filename");
+      console.log(filename);
+    } catch (err) {
+      console.log("An error occurred:");
+      console.log(err);
+      console.error("An error occurred:", err);
+      // If err object contains a message, use it. Otherwise use a default message
+      const _errorMessage = err.message || "An error occurred";
+
+      // Handle the error here
+      setInProgress(false);
+      setErrorMessage(_errorMessage);
+      setShowError(true);
     }
-    console.log("filename");
-    console.log(filename);
   };
 
   const theme = createTheme();
@@ -317,7 +347,16 @@ function App() {
                   >
                     Generate
                   </Button>
+                  <Snackbar
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                    open={showError}
+                    autoHideDuration={5000}
+                    onClose={() => setShowError(false)}
+                  >
+                    <Alert severity="error">{errorMessage}</Alert>
+                  </Snackbar>
                 </form>
+
                 <Backdrop
                   sx={{
                     color: "#fff",
