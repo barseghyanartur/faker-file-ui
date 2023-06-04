@@ -114,6 +114,11 @@ const formValues = {
     root_element: "root",
     row_element: "row",
     num_rows: 10,
+    data_columns: {
+      name: "{{name}}",
+      sentence: "{{sentence}}",
+      address: "{{address}}",
+    },
   },
   zip: { basename: "test" },
 };
@@ -163,7 +168,14 @@ describe("Submit form data and get file download link", () => {
       // Fill in the form and submit it
       const values = formValues[provider];
       for (let field in values) {
-        cy.get(`[name="${field}"]`).type(values[field]);
+        // If value is an object, convert it to a JSON string
+        const value =
+          typeof values[field] === "object"
+            ? JSON.stringify(values[field])
+            : values[field];
+        cy.get(`[name="${field}"]`).type(value, {
+          parseSpecialCharSequences: false,
+        });
       }
 
       const extension = values["extension"] ? values["extension"] : provider;
