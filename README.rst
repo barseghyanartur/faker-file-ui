@@ -67,7 +67,6 @@ Three column design:
     |  - svg                |                       |                       |
     |  - tar                |                       |                       |
     |  - txt                |                       |                       |
-    |  - webp               |                       |                       |
     |  - xlsx               |                       |                       |
     |  - xml                |                       |                       |
     |  - zip                |                       |                       |
@@ -106,7 +105,6 @@ Supported file types
 - ``SVG``
 - ``TAR``
 - ``TXT``
-- ``WEBP``
 - ``XLSX``
 - ``XML``
 - ``ZIP``
