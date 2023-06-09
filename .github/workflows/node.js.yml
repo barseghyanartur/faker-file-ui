@@ -24,3 +24,17 @@ jobs:
           cache: "npm"
       - run: npm install
       - run: npm run cy:test-headless
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2
+
+  finish:
+    needs: build
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@v2
+      with:
+        parallel-finished: true
+        carryforward: "run-1,run-2"
+  
