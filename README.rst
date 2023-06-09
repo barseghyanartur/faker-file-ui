@@ -1,12 +1,22 @@
 ===============
 `faker-file-ui`
 ===============
+.. External references
+
 .. _faker-file: https://github.com/barseghyanartur/faker-file
 .. _faker-file-api: https://github.com/barseghyanartur/faker-file-api
 .. _ReactJS: https://reactjs.org/
 .. _MaterialUI: https://mui.com/material-ui/
 
 `ReactJS`_/`MaterialUI`_ based UI frontend for `faker-file-api`_ REST API.
+
+.. image:: https://github.com/barseghyanartur/faker-file-ui/actions/workflows/node.js.yml/badge.svg?branch=main
+   :target: https://github.com/barseghyanartur/faker-file-ui/actions
+   :alt: Build Status
+
+.. image:: https://coveralls.io/repos/github/barseghyanartur/faker-file-ui/badge.svg?branch=main&service=github
+    :target: https://coveralls.io/github/barseghyanartur/faker-file-ui?branch=main
+    :alt: Coverage
 
 Prerequisites
 =============
