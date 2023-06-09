@@ -203,3 +203,32 @@ describe("Submit form data and get file download link", () => {
     });
   });
 });
+
+describe('Error Handling', () => {
+  beforeEach(() => {
+    cy.visit("http://127.0.0.1:3000");
+    cy.intercept("GET", "http://127.0.0.1:8000/openapi.json", {
+      fixture: "openapi.json",
+    }).as("fetchEndpoints");
+    cy.wait("@fetchEndpoints");
+  });
+
+  Object.entries(providers).forEach(([provider]) => {
+    it(`handles error for ${provider}`, () => {
+      cy.intercept('POST', `http://127.0.0.1:8000/${provider}_file/`, {
+        statusCode: 422,
+        body: { error: 'An error occurred.' }
+      }).as('postError');
+
+      // Assuming there is a button that submits the form
+      cy.contains('span', provider).click();
+      cy.get('button').contains('Generate').click();
+
+      // Wait for the request to resolve
+      cy.wait('@postError', { timeout: 20000 });
+
+      // Check for the error message in the UI
+      cy.get("div").contains('An error occurred.').should('be.visible');
+    });
+  });
+});
