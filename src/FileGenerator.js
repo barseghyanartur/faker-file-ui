@@ -159,6 +159,8 @@ function App() {
                 console.log(value);
                 value = null;
               }
+            } else if (["size"].includes(name) && typeof value === "string" && value.trim() !== "") {
+              value = value.split(",");
             }
             console.log("name");
             console.log(name);
@@ -280,7 +282,7 @@ function App() {
                     selected={selectedEndpoint === endpoint}
                     onClick={() => handleEndpointClick(endpoint)}
                   >
-                    <ListItemText primary={endpoint.split("_file")[0]} />
+                    <ListItemText primary={endpoint.split("_file")[0].replace(/_/g, " ")} />
                   </ListItemButton>
                 ))}
             </List>
