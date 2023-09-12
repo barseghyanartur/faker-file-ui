@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import {
   Grid,
@@ -16,7 +17,10 @@ import {
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import InputLabel from "@mui/material/InputLabel";
 import Item from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import axios from "axios";
@@ -49,6 +53,7 @@ function App() {
     "options",
     "mp3_generator_kwargs",
     "pdf_generator_kwargs",
+    "image_generator_kwargs",
   ]; // Multi-line fields
 
   axiosRetry(axios, {
@@ -122,10 +127,12 @@ function App() {
     console.log(models[selectedModel].properties[name]);
     console.log("checked");
     console.log(checked);
+    console.log("value", value);
+    let valueType = models[selectedModel].properties[name]?.type;
     setFormOptions((prevOptions) => ({
       ...prevOptions,
       [name]:
-        models[selectedModel].properties[name].type === "boolean"
+        valueType === "boolean"
           ? checked
           : value,
     }));
@@ -148,6 +155,7 @@ function App() {
                 "options",
                 "mp3_generator_kwargs",
                 "pdf_generator_kwargs",
+                "image_generator_kwargs",
               ].includes(name) &&
               typeof value === "string" &&
               value.trim() !== ""
@@ -305,14 +313,14 @@ function App() {
                         ? { multiline: true, rows: 4, maxRows: 20, inputProps }
                         : {};
                       const key = `${selectedModel}_${name}`;
-                      if (property.type === "boolean") {
+                      if (property?.type === "boolean") {
                         return (
                           <FormControlLabel
                             key={key}
                             control={
                               <Checkbox
                                 name={name}
-                                label={name}
+                                label={property.title || name}
                                 checked={
                                   formOptions[name] || property.default || false
                                 }
@@ -324,6 +332,47 @@ function App() {
                             }
                             label={property.title || name}
                           />
+                        );
+                      } else if (property?.allOf) {
+                        let defaultValue;
+                        let enumModel;
+                        let label;
+                        for (const condition of property.allOf) {
+                          if (condition.$ref) {
+                            const modelName = condition.$ref.split("/").pop();
+                            enumModel = models[modelName]?.enum;
+                            label = models[modelName]?.title || name;
+                            if (enumModel) break;
+                          }
+                        }
+                        // console.log("enumModel", enumModel);
+                        defaultValue = property?.default || enumModel?.[0] || "";
+                        // Initialize the state if it's not set
+                        if (formOptions[name] === undefined) {
+                          setFormOptions(prevOptions => ({
+                            ...prevOptions,
+                            [name]: defaultValue,
+                          }));
+                        }
+                        return (
+                          <FormControl key={key} sx={{ m: 0, mt: 2, mb: 2, width: '100%' }}>
+                            <InputLabel htmlFor={name}>{label}</InputLabel>
+                            <Select
+                              labelId={name}
+                              id={name}
+                              name={name}
+                              value={formOptions[name] || defaultValue}
+                              onChange={handleOptionChange}
+                              margin="normal"
+                              variant="outlined"
+                            >
+                              {enumModel?.map((option, index) => (
+                                <MenuItem key={index} value={option}>
+                                  {option}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          </FormControl>
                         );
                       } else {
                         return (
