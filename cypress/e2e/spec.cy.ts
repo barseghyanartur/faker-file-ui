@@ -1,3 +1,6 @@
+/**
+ * Webp is disabled.
+*/
 const providers = {
   bin: ["basename", "prefix", "length", "content"],
   csv: [
@@ -28,6 +31,11 @@ const providers = {
     "chapter_title",
   ],
   generic: ["content", "extension", "basename", "prefix"],
+  "graphic ico": ["size", "hue", "luminosity", "basename", "prefix"],
+  "graphic jpeg": ["size", "hue", "luminosity", "basename", "prefix"],
+  "graphic pdf": ["size", "hue", "luminosity", "basename", "prefix"],
+  "graphic png": ["size", "hue", "luminosity", "basename", "prefix"],
+  "graphic webp": ["size", "hue", "luminosity", "basename", "prefix"],
   ico: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
   jpeg: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
   mp3: [
@@ -56,7 +64,7 @@ const providers = {
   svg: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
   tar: ["basename", "prefix", "options", "compression"],
   txt: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  webp: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  // webp: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
   xlsx: ["basename", "prefix", "data_columns", "num_rows", "content"],
   xml: [
     "basename",
@@ -71,6 +79,9 @@ const providers = {
   zip: ["basename", "prefix", "options"],
 };
 
+/**
+ * Webp is disabled.
+*/
 const formValues = {
   // This object should include values to fill in the form for each provider.
   // Each key should be a provider name, and each value should be an object that has field names and values.
@@ -84,6 +95,11 @@ const formValues = {
     content: "<html><body>hello</body></html>",
     extension: "html",
   },
+  "graphic ico": { basename: "test" },
+  "graphic jpeg": { basename: "test" },
+  "graphic pdf": { basename: "test" },
+  "graphic png": { basename: "test" },
+  "graphic webp": { basename: "test" },
   ico: { basename: "test", max_nb_chars: 5000 },
   jpeg: { basename: "test", max_nb_chars: 5000 },
   mp3: {
@@ -107,7 +123,7 @@ const formValues = {
   svg: { basename: "test", max_nb_chars: 5000 },
   tar: { basename: "test" },
   txt: { basename: "test", max_nb_chars: 10000 },
-  webp: { basename: "test", max_nb_chars: 5000 },
+  // webp: { basename: "test", max_nb_chars: 5000 },
   xlsx: { basename: "test", num_rows: 10 },
   xml: {
     basename: "test",
@@ -122,6 +138,20 @@ const formValues = {
   },
   zip: { basename: "test" },
 };
+
+let selects = [
+    "mp3_generator_cls",
+    "pdf_generator_cls",
+    "image_generator_cls",
+]
+
+beforeEach(() => {
+  cy.viewport(2048, 1152);
+  cy.window().then((win) => {
+    win.scrollTo(0, 0)
+  });
+  // cy.get('#root').scrollTo('top')
+})
 
 describe("Get JSON schema", () => {
   it("passes", () => {
@@ -142,9 +172,17 @@ describe("Faker File UI", () => {
 
   Object.entries(providers).forEach(([provider, fields]) => {
     it(`loads the form for ${provider}`, () => {
-      cy.contains("span", provider).click();
+      cy.get("div.category").contains("span", new RegExp(`^${provider}$`)).click();
+      cy.window().then((win) => {
+        win.scrollTo(0, 0)
+      });
       fields.forEach((field) => {
-        cy.get(`[name="${field}"]`).should("be.visible");
+        if (selects.includes(field)) {
+          // Special handling for the select fields
+          cy.get(`[name="${field}"]`).should('exist');
+        } else {
+          cy.get(`[name="${field}"]`).should('be.visible');
+        }
       });
     });
   });
@@ -160,10 +198,10 @@ describe("Submit form data and get file download link", () => {
       }).as("fetchEndpoints");
       cy.wait("@fetchEndpoints");
 
-      cy.contains("span", provider).click();
-      fields.forEach((field) => {
-        cy.get(`[name="${field}"]`).should("be.visible");
-      });
+      cy.get("div.category").contains("span", provider).click();
+      // fields.forEach((field) => {
+      //   cy.get(`[name="${field}"]`).should("be.visible");
+      // });
 
       // Fill in the form and submit it
       const values = formValues[provider];

@@ -1,6 +1,9 @@
 {
   "openapi": "3.0.2",
-  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
   "paths": {
     "/heartbeat/": {
       "get": {
@@ -10,7 +13,11 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           }
         }
       }
@@ -23,20 +30,29 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           }
         }
       }
     },
     "/bin_file/": {
       "post": {
+        "tags": [
+          "Binary"
+        ],
         "summary": "BIN file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"length\": 1048576,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_bin_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/bin_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/bin_file_model"
+              }
             }
           },
           "required": true
@@ -44,13 +60,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -59,13 +81,18 @@
     },
     "/csv_file/": {
       "post": {
+        "tags": [
+          "Spreadsheet"
+        ],
         "summary": "CSV file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"header\": null,\n        \"data_columns\": [\n            \"{{name}}\",\n            \"{{address}}\"\n        ],\n        \"num_rows\": 10,\n        \"include_row_ids\": false,\n        \"content\": null,\n        \"encoding\": null\n\n    }",
         "operationId": "_provider_func_csv_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/csv_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/csv_file_model"
+              }
             }
           },
           "required": true
@@ -73,13 +100,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -88,13 +121,18 @@
     },
     "/docx_file/": {
       "post": {
+        "tags": [
+          "Rich Text"
+        ],
         "summary": "DOCX file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_docx_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/docx_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/docx_file_model"
+              }
             }
           },
           "required": true
@@ -102,13 +140,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -117,13 +161,18 @@
     },
     "/eml_file/": {
       "post": {
+        "tags": [
+          "Archive"
+        ],
         "summary": "EML file provider.",
-        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"options\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"options\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null,\n        \"subject\": null\n\n    }",
         "operationId": "_provider_func_eml_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/eml_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/eml_file_model"
+              }
             }
           },
           "required": true
@@ -131,13 +180,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -146,13 +201,18 @@
     },
     "/epub_file/": {
       "post": {
+        "tags": [
+          "Publishing"
+        ],
         "summary": "EPUB file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null,\n        \"title\": null,\n        \"chapter_title\": null\n\n    }",
         "operationId": "_provider_func_epub_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/epub_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/epub_file_model"
+              }
             }
           },
           "required": true
@@ -160,13 +220,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -175,13 +241,18 @@
     },
     "/generic_file/": {
       "post": {
+        "tags": [
+          "Generic"
+        ],
         "summary": "Generic file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"content\": null,\n        \"extension\": null,\n        \"basename\": null,\n        \"prefix\": null\n\n    }",
         "operationId": "_provider_func_generic_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/generic_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/generic_file_model"
+              }
             }
           },
           "required": true
@@ -189,13 +260,219 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/graphic_ico_file/": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Graphic ICO file provider.",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"size\": [\n            256,\n            256\n        ],\n        \"hue\": null,\n        \"luminosity\": null\n\n    }",
+        "operationId": "_provider_func_graphic_ico_file__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/graphic_ico_file_model"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/graphic_jpeg_file/": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Graphic JPEG file provider.",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"size\": [\n            256,\n            256\n        ],\n        \"hue\": null,\n        \"luminosity\": null\n\n    }",
+        "operationId": "_provider_func_graphic_jpeg_file__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/graphic_jpeg_file_model"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/graphic_pdf_file/": {
+      "post": {
+        "tags": [
+          "Publishing"
+        ],
+        "summary": "Graphic PDF file provider.",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"size\": [\n            256,\n            256\n        ],\n        \"hue\": null,\n        \"luminosity\": null\n\n    }",
+        "operationId": "_provider_func_graphic_pdf_file__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/graphic_pdf_file_model"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/graphic_png_file/": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Graphic PNG file provider.",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"size\": [\n            256,\n            256\n        ],\n        \"hue\": null,\n        \"luminosity\": null\n\n    }",
+        "operationId": "_provider_func_graphic_png_file__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/graphic_png_file_model"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/graphic_webp_file/": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Graphic WEBP file provider.",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"size\": [\n            256,\n            256\n        ],\n        \"hue\": null,\n        \"luminosity\": null\n\n    }",
+        "operationId": "_provider_func_graphic_webp_file__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/graphic_webp_file_model"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -204,13 +481,18 @@
     },
     "/ico_file/": {
       "post": {
+        "tags": [
+          "Image"
+        ],
         "summary": "ICO file provider.",
-        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null,\n        \"image_generator_cls\": \"faker_file.providers.image.imgkit_generator.ImgkitImageGenerator\",\n        \"image_generator_kwargs\": null\n\n    }",
         "operationId": "_provider_func_ico_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ico_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/ico_file_model"
+              }
             }
           },
           "required": true
@@ -218,13 +500,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -233,13 +521,18 @@
     },
     "/jpeg_file/": {
       "post": {
+        "tags": [
+          "Image"
+        ],
         "summary": "JPEG file provider.",
-        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null,\n        \"image_generator_cls\": \"faker_file.providers.image.imgkit_generator.ImgkitImageGenerator\",\n        \"image_generator_kwargs\": null\n\n    }",
         "operationId": "_provider_func_jpeg_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/jpeg_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/jpeg_file_model"
+              }
             }
           },
           "required": true
@@ -247,13 +540,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -262,13 +561,18 @@
     },
     "/mp3_file/": {
       "post": {
+        "tags": [
+          "Audio"
+        ],
         "summary": "MP3 file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 500,\n        \"content\": null,\n        \"mp3_generator_cls\": \"faker_file.providers.mp3_file.generators.gtts_generator.GttsMp3Generator\",\n        \"mp3_generator_kwargs\": null\n\n    }",
         "operationId": "_provider_func_mp3_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/mp3_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/mp3_file_model"
+              }
             }
           },
           "required": true
@@ -276,13 +580,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -291,13 +601,18 @@
     },
     "/odp_file/": {
       "post": {
+        "tags": [
+          "Presentation"
+        ],
         "summary": "ODP file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_odp_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/odp_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/odp_file_model"
+              }
             }
           },
           "required": true
@@ -305,13 +620,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -320,13 +641,18 @@
     },
     "/ods_file/": {
       "post": {
+        "tags": [
+          "Spreadsheet"
+        ],
         "summary": "ODS file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"data_columns\": null,\n        \"num_rows\": 10,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_ods_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ods_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/ods_file_model"
+              }
             }
           },
           "required": true
@@ -334,13 +660,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -349,13 +681,18 @@
     },
     "/odt_file/": {
       "post": {
+        "tags": [
+          "Rich Text"
+        ],
         "summary": "ODT file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_odt_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/odt_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/odt_file_model"
+              }
             }
           },
           "required": true
@@ -363,13 +700,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -378,13 +721,18 @@
     },
     "/pdf_file/": {
       "post": {
+        "tags": [
+          "Publishing"
+        ],
         "summary": "PDF file provider.",
-        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null,\n        \"pdf_generator_cls\": \"faker_file.providers.pdf_file.generators.pdfkit_generator.PdfkitPdfGenerator\",\n        \"pdf_generator_kwargs\": null\n\n    }",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null,\n        \"pdf_generator_cls\": \"faker_file.providers.pdf_file.generators.pil_generator.PilPdfGenerator\",\n        \"pdf_generator_kwargs\": null\n\n    }",
         "operationId": "_provider_func_pdf_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/pdf_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/pdf_file_model"
+              }
             }
           },
           "required": true
@@ -392,13 +740,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -407,13 +761,18 @@
     },
     "/png_file/": {
       "post": {
+        "tags": [
+          "Image"
+        ],
         "summary": "PNG file provider.",
-        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null,\n        \"image_generator_cls\": \"faker_file.providers.image.imgkit_generator.ImgkitImageGenerator\",\n        \"image_generator_kwargs\": null\n\n    }",
         "operationId": "_provider_func_png_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/png_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/png_file_model"
+              }
             }
           },
           "required": true
@@ -421,13 +780,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -436,13 +801,18 @@
     },
     "/pptx_file/": {
       "post": {
+        "tags": [
+          "Presentation"
+        ],
         "summary": "PPTX file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_pptx_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/pptx_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/pptx_file_model"
+              }
             }
           },
           "required": true
@@ -450,13 +820,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -465,13 +841,18 @@
     },
     "/rtf_file/": {
       "post": {
+        "tags": [
+          "Rich Text"
+        ],
         "summary": "RTF file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_rtf_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/rtf_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/rtf_file_model"
+              }
             }
           },
           "required": true
@@ -479,13 +860,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -494,13 +881,18 @@
     },
     "/svg_file/": {
       "post": {
+        "tags": [
+          "Image"
+        ],
         "summary": "SVG file provider.",
-        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
+        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null,\n        \"image_generator_cls\": \"faker_file.providers.image.imgkit_generator.ImgkitImageGenerator\",\n        \"image_generator_kwargs\": null\n\n    }",
         "operationId": "_provider_func_svg_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/svg_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/svg_file_model"
+              }
             }
           },
           "required": true
@@ -508,13 +900,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -523,13 +921,18 @@
     },
     "/tar_file/": {
       "post": {
+        "tags": [
+          "Archive"
+        ],
         "summary": "TAR file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"options\": null,\n        \"compression\": null\n\n    }",
         "operationId": "_provider_func_tar_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/tar_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/tar_file_model"
+              }
             }
           },
           "required": true
@@ -537,13 +940,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -552,56 +961,38 @@
     },
     "/txt_file/": {
       "post": {
+        "tags": [
+          "Text"
+        ],
         "summary": "TXT file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 10000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_txt_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/txt_file_model" }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              "schema": {
+                "$ref": "#/components/schemas/txt_file_model"
               }
             }
-          }
-        }
-      }
-    },
-    "/webp_file/": {
-      "post": {
-        "summary": "WEBP file provider.",
-        "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"max_nb_chars\": 5000,\n        \"wrap_chars_after\": null,\n        \"content\": null\n\n    }",
-        "operationId": "_provider_func_webp_file__post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/webp_file_model" }
-            }
           },
           "required": true
         },
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -610,13 +1001,18 @@
     },
     "/xlsx_file/": {
       "post": {
+        "tags": [
+          "Spreadsheet"
+        ],
         "summary": "XLSX file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"data_columns\": null,\n        \"num_rows\": 10,\n        \"content\": null\n\n    }",
         "operationId": "_provider_func_xlsx_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/xlsx_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/xlsx_file_model"
+              }
             }
           },
           "required": true
@@ -624,13 +1020,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -639,13 +1041,18 @@
     },
     "/xml_file/": {
       "post": {
+        "tags": [
+          "Data"
+        ],
         "summary": "XML file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"root_element\": \"root\",\n        \"row_element\": \"row\",\n        \"data_columns\": null,\n        \"num_rows\": 10,\n        \"content\": null,\n        \"encoding\": null\n\n    }",
         "operationId": "_provider_func_xml_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/xml_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/xml_file_model"
+              }
             }
           },
           "required": true
@@ -653,13 +1060,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -668,13 +1081,18 @@
     },
     "/zip_file/": {
       "post": {
+        "tags": [
+          "Archive"
+        ],
         "summary": "ZIP file provider.",
         "description": "**Example Value:**\n\n    {\n    \n        \"basename\": null,\n        \"prefix\": null,\n        \"options\": null\n\n    }",
         "operationId": "_provider_func_zip_file__post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/zip_file_model" }
+              "schema": {
+                "$ref": "#/components/schemas/zip_file_model"
+              }
             }
           },
           "required": true
@@ -682,13 +1100,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -705,30 +1129,85 @@
           "detail": {
             "title": "Detail",
             "type": "array",
-            "items": { "$ref": "#/components/schemas/ValidationError" }
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
           }
         }
       },
+      "ImageGeneratorCls": {
+        "title": "ImageGeneratorCls",
+        "enum": [
+          "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator",
+          "faker_file.providers.image.pil_generator.PilImageGenerator"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "Mp3GeneratorCls": {
+        "title": "Mp3GeneratorCls",
+        "enum": [
+          "faker_file.providers.mp3_file.generators.gtts_generator.GttsMp3Generator",
+          "faker_file.providers.mp3_file.generators.edge_tts_generator.EdgeTtsMp3Generator"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "PDFGeneratorCls": {
+        "title": "PDFGeneratorCls",
+        "enum": [
+          "faker_file.providers.pdf_file.generators.pil_generator.PilPdfGenerator",
+          "faker_file.providers.pdf_file.generators.pdfkit_generator.PdfkitPdfGenerator",
+          "faker_file.providers.pdf_file.generators.reportlab_generator.ReportlabPdfGenerator"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
       "ValidationError": {
         "title": "ValidationError",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "loc": {
             "title": "Location",
             "type": "array",
-            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] }
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
           },
-          "msg": { "title": "Message", "type": "string" },
-          "type": { "title": "Error Type", "type": "string" }
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
         }
       },
       "bin_file_model": {
         "title": "bin",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "length": {
             "title": "Length",
             "type": "integer",
@@ -740,45 +1219,85 @@
             "format": "binary"
           }
         },
-        "examples": [{ "length": 1048576 }, { "a": "A" }]
+        "examples": [
+          {
+            "length": 1048576
+          },
+          {}
+        ]
       },
       "csv_file_model": {
         "title": "csv",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "header": {
             "title": "Header",
             "type": "array",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           },
           "data_columns": {
             "title": "Data Columns",
             "type": "array",
-            "items": { "type": "string" },
-            "default": ["{{name}}", "{{address}}"]
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "{{name}}",
+              "{{address}}"
+            ]
           },
-          "num_rows": { "title": "Num Rows", "type": "integer", "default": 10 },
+          "num_rows": {
+            "title": "Num Rows",
+            "type": "integer",
+            "default": 10
+          },
           "include_row_ids": {
             "title": "Include Row Ids",
             "type": "boolean",
             "default": false
           },
-          "content": { "title": "Content", "type": "string" },
-          "encoding": { "title": "Encoding", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "encoding": {
+            "title": "Encoding",
+            "type": "string"
+          }
         },
         "examples": [
-          { "data_columns": ["{{name}}", "{{address}}"], "num_rows": 10 },
-          { "a": "A" }
+          {
+            "data_columns": [
+              "{{name}}",
+              "{{address}}"
+            ],
+            "num_rows": 10
+          },
+          {}
         ]
       },
       "docx_file_model": {
         "title": "docx",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -788,17 +1307,34 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
         },
-        "examples": [{ "max_nb_chars": 10000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 10000
+          },
+          {}
+        ]
       },
       "eml_file_model": {
         "title": "eml",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
-          "options": { "title": "Options", "type": "object" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
+          "options": {
+            "title": "Options",
+            "type": "object"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -808,16 +1344,34 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
         },
-        "examples": [{ "max_nb_chars": 10000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 10000
+          },
+          {}
+        ]
       },
       "epub_file_model": {
         "title": "epub",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -827,28 +1381,370 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" },
-          "title": { "title": "Title", "type": "string" },
-          "chapter_title": { "title": "Chapter Title", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "chapter_title": {
+            "title": "Chapter Title",
+            "type": "string"
+          }
         },
-        "examples": [{ "max_nb_chars": 10000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 10000
+          },
+          {}
+        ]
       },
       "generic_file_model": {
         "title": "generic",
         "type": "object",
         "properties": {
-          "content": { "title": "Content", "type": "string" },
-          "extension": { "title": "Extension", "type": "string" },
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "extension": {
+            "title": "Extension",
+            "type": "string"
+          },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          }
         }
+      },
+      "graphic_ico_file_model": {
+        "title": "graphic_ico",
+        "type": "object",
+        "properties": {
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
+          "size": {
+            "title": "Size",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "default": [
+              256,
+              256
+            ]
+          },
+          "hue": {
+            "title": "Hue",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "luminosity": {
+            "title": "Luminosity",
+            "type": "string"
+          }
+        },
+        "examples": [
+          {
+            "size": [
+              256,
+              256
+            ]
+          },
+          {}
+        ]
+      },
+      "graphic_jpeg_file_model": {
+        "title": "graphic_jpeg",
+        "type": "object",
+        "properties": {
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
+          "size": {
+            "title": "Size",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "default": [
+              256,
+              256
+            ]
+          },
+          "hue": {
+            "title": "Hue",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "luminosity": {
+            "title": "Luminosity",
+            "type": "string"
+          }
+        },
+        "examples": [
+          {
+            "size": [
+              256,
+              256
+            ]
+          },
+          {}
+        ]
+      },
+      "graphic_pdf_file_model": {
+        "title": "graphic_pdf",
+        "type": "object",
+        "properties": {
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
+          "size": {
+            "title": "Size",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "default": [
+              256,
+              256
+            ]
+          },
+          "hue": {
+            "title": "Hue",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "luminosity": {
+            "title": "Luminosity",
+            "type": "string"
+          }
+        },
+        "examples": [
+          {
+            "size": [
+              256,
+              256
+            ]
+          },
+          {}
+        ]
+      },
+      "graphic_png_file_model": {
+        "title": "graphic_png",
+        "type": "object",
+        "properties": {
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
+          "size": {
+            "title": "Size",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "default": [
+              256,
+              256
+            ]
+          },
+          "hue": {
+            "title": "Hue",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "luminosity": {
+            "title": "Luminosity",
+            "type": "string"
+          }
+        },
+        "examples": [
+          {
+            "size": [
+              256,
+              256
+            ]
+          },
+          {}
+        ]
+      },
+      "graphic_webp_file_model": {
+        "title": "graphic_webp",
+        "type": "object",
+        "properties": {
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
+          "size": {
+            "title": "Size",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "default": [
+              256,
+              256
+            ]
+          },
+          "hue": {
+            "title": "Hue",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "luminosity": {
+            "title": "Luminosity",
+            "type": "string"
+          }
+        },
+        "examples": [
+          {
+            "size": [
+              256,
+              256
+            ]
+          },
+          {}
+        ]
       },
       "ico_file_model": {
         "title": "ico",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -858,16 +1754,43 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "image_generator_cls": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageGeneratorCls"
+              }
+            ],
+            "default": "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator"
+          },
+          "image_generator_kwargs": {
+            "title": "Image Generator Kwargs",
+            "type": "object"
+          }
         },
-        "examples": [{ "max_nb_chars": 5000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 5000,
+            "image_generator_cls": "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator"
+          },
+          {}
+        ]
       },
       "jpeg_file_model": {
         "title": "jpeg",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -877,25 +1800,58 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "image_generator_cls": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageGeneratorCls"
+              }
+            ],
+            "default": "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator"
+          },
+          "image_generator_kwargs": {
+            "title": "Image Generator Kwargs",
+            "type": "object"
+          }
         },
-        "examples": [{ "max_nb_chars": 5000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 5000,
+            "image_generator_cls": "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator"
+          },
+          {}
+        ]
       },
       "mp3_file_model": {
         "title": "mp3",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
             "default": 500
           },
-          "content": { "title": "Content", "type": "string" },
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
           "mp3_generator_cls": {
-            "title": "Mp3 Generator Cls",
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Mp3GeneratorCls"
+              }
+            ],
             "default": "faker_file.providers.mp3_file.generators.gtts_generator.GttsMp3Generator"
           },
           "mp3_generator_kwargs": {
@@ -908,15 +1864,21 @@
             "max_nb_chars": 500,
             "mp3_generator_cls": "faker_file.providers.mp3_file.generators.gtts_generator.GttsMp3Generator"
           },
-          { "a": "A" }
+          {}
         ]
       },
       "odp_file_model": {
         "title": "odp",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -926,32 +1888,66 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
         },
-        "examples": [{ "max_nb_chars": 10000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 10000
+          },
+          {}
+        ]
       },
       "ods_file_model": {
         "title": "ods",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "data_columns": {
             "title": "Data Columns",
             "type": "object",
-            "additionalProperties": { "type": "string" }
+            "additionalProperties": {
+              "type": "string"
+            }
           },
-          "num_rows": { "title": "Num Rows", "type": "integer", "default": 10 },
-          "content": { "title": "Content", "type": "string" }
+          "num_rows": {
+            "title": "Num Rows",
+            "type": "integer",
+            "default": 10
+          },
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
         },
-        "examples": [{ "num_rows": 10 }, { "a": "A" }]
+        "examples": [
+          {
+            "num_rows": 10
+          },
+          {}
+        ]
       },
       "odt_file_model": {
         "title": "odt",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -961,16 +1957,30 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
         },
-        "examples": [{ "max_nb_chars": 10000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 10000
+          },
+          {}
+        ]
       },
       "pdf_file_model": {
         "title": "pdf",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -980,11 +1990,17 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" },
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
           "pdf_generator_cls": {
-            "title": "Pdf Generator Cls",
-            "type": "string",
-            "default": "faker_file.providers.pdf_file.generators.pdfkit_generator.PdfkitPdfGenerator"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PDFGeneratorCls"
+              }
+            ],
+            "default": "faker_file.providers.pdf_file.generators.pil_generator.PilPdfGenerator"
           },
           "pdf_generator_kwargs": {
             "title": "Pdf Generator Kwargs",
@@ -994,17 +2010,23 @@
         "examples": [
           {
             "max_nb_chars": 10000,
-            "pdf_generator_cls": "faker_file.providers.pdf_file.generators.pdfkit_generator.PdfkitPdfGenerator"
+            "pdf_generator_cls": "faker_file.providers.pdf_file.generators.pil_generator.PilPdfGenerator"
           },
-          { "a": "A" }
+          {}
         ]
       },
       "png_file_model": {
         "title": "png",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -1014,16 +2036,43 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "image_generator_cls": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageGeneratorCls"
+              }
+            ],
+            "default": "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator"
+          },
+          "image_generator_kwargs": {
+            "title": "Image Generator Kwargs",
+            "type": "object"
+          }
         },
-        "examples": [{ "max_nb_chars": 5000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 5000,
+            "image_generator_cls": "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator"
+          },
+          {}
+        ]
       },
       "pptx_file_model": {
         "title": "pptx",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -1033,16 +2082,30 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
         },
-        "examples": [{ "max_nb_chars": 10000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 10000
+          },
+          {}
+        ]
       },
       "rtf_file_model": {
         "title": "rtf",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -1052,16 +2115,30 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
         },
-        "examples": [{ "max_nb_chars": 10000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 10000
+          },
+          {}
+        ]
       },
       "svg_file_model": {
         "title": "svg",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -1071,26 +2148,65 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "image_generator_cls": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageGeneratorCls"
+              }
+            ],
+            "default": "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator"
+          },
+          "image_generator_kwargs": {
+            "title": "Image Generator Kwargs",
+            "type": "object"
+          }
         },
-        "examples": [{ "max_nb_chars": 5000 }, { "a": "A" }]
+        "examples": [
+          {
+            "max_nb_chars": 5000,
+            "image_generator_cls": "faker_file.providers.image.imgkit_generator.ImgkitImageGenerator"
+          },
+          {}
+        ]
       },
       "tar_file_model": {
         "title": "tar",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
-          "options": { "title": "Options", "type": "object" },
-          "compression": { "title": "Compression", "type": "string" }
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
+          "options": {
+            "title": "Options",
+            "type": "object"
+          },
+          "compression": {
+            "title": "Compression",
+            "type": "string"
+          }
         }
       },
       "txt_file_model": {
         "title": "txt",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "max_nb_chars": {
             "title": "Max Nb Chars",
             "type": "integer",
@@ -1100,51 +2216,66 @@
             "title": "Wrap Chars After",
             "type": "integer"
           },
-          "content": { "title": "Content", "type": "string" }
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
         },
-        "examples": [{ "max_nb_chars": 10000 }, { "a": "A" }]
-      },
-      "webp_file_model": {
-        "title": "webp",
-        "type": "object",
-        "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
-          "max_nb_chars": {
-            "title": "Max Nb Chars",
-            "type": "integer",
-            "default": 5000
+        "examples": [
+          {
+            "max_nb_chars": 10000
           },
-          "wrap_chars_after": {
-            "title": "Wrap Chars After",
-            "type": "integer"
-          },
-          "content": { "title": "Content", "type": "string" }
-        },
-        "examples": [{ "max_nb_chars": 5000 }, { "a": "A" }]
+          {}
+        ]
       },
       "xlsx_file_model": {
         "title": "xlsx",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "data_columns": {
             "title": "Data Columns",
             "type": "object",
-            "additionalProperties": { "type": "string" }
+            "additionalProperties": {
+              "type": "string"
+            }
           },
-          "num_rows": { "title": "Num Rows", "type": "integer", "default": 10 },
-          "content": { "title": "Content", "type": "string" }
+          "num_rows": {
+            "title": "Num Rows",
+            "type": "integer",
+            "default": 10
+          },
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
         },
-        "examples": [{ "num_rows": 10 }, { "a": "A" }]
+        "examples": [
+          {
+            "num_rows": 10
+          },
+          {}
+        ]
       },
       "xml_file_model": {
         "title": "xml",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
           "root_element": {
             "title": "Root Element",
             "type": "string",
@@ -1158,24 +2289,49 @@
           "data_columns": {
             "title": "Data Columns",
             "type": "object",
-            "additionalProperties": { "type": "string" }
+            "additionalProperties": {
+              "type": "string"
+            }
           },
-          "num_rows": { "title": "Num Rows", "type": "integer", "default": 10 },
-          "content": { "title": "Content", "type": "string" },
-          "encoding": { "title": "Encoding", "type": "string" }
+          "num_rows": {
+            "title": "Num Rows",
+            "type": "integer",
+            "default": 10
+          },
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "encoding": {
+            "title": "Encoding",
+            "type": "string"
+          }
         },
         "examples": [
-          { "root_element": "root", "row_element": "row", "num_rows": 10 },
-          { "a": "A" }
+          {
+            "root_element": "root",
+            "row_element": "row",
+            "num_rows": 10
+          },
+          {}
         ]
       },
       "zip_file_model": {
         "title": "zip",
         "type": "object",
         "properties": {
-          "basename": { "title": "Basename", "type": "string" },
-          "prefix": { "title": "Prefix", "type": "string" },
-          "options": { "title": "Options", "type": "object" }
+          "basename": {
+            "title": "Basename",
+            "type": "string"
+          },
+          "prefix": {
+            "title": "Prefix",
+            "type": "string"
+          },
+          "options": {
+            "title": "Options",
+            "type": "object"
+          }
         }
       }
     }
