@@ -11,7 +11,7 @@ run:
 	npm start
 
 # Run the tests
-test:
+test: install
 	npm run cy:test-headless
 
 # Format the code with Prettier
@@ -19,7 +19,7 @@ format:
 	npx prettier --write .
 
 # Check code formatting with Prettier
-check-format:
+check-format: install
 	npx prettier --check .
 
 clean:

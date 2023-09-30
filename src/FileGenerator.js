@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Collapse from '@mui/material/Collapse';
 import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -8,12 +9,19 @@ import {
   Grid,
   Link,
   List,
+  ListItem,
   ListItemButton,
   ListItemText,
   TextField,
   Typography,
   Button,
 } from "@mui/material";
+
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -38,6 +46,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [inProgress, setInProgress] = useState(false);
   const [endpoints, setEndpoints] = useState(null);
+  const [groupedEndpoints, setGroupedEndpoints] = useState({});
+  const [openCategory, setOpenCategory] = useState(null);
   const [selectedEndpoint, setSelectedEndpoint] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedFileExtension, setSelectedFileExtension] = useState(null);
@@ -74,15 +84,27 @@ function App() {
       });
       const schema = response.data;
       const paths = schema.paths;
+      let grouped = {};
       const endpoints = Object.keys(paths).reduce((acc, path) => {
         const endpoint = path.split("/")[1];
         if (endpoint !== "heartbeat" && endpoint !== "providers") {
-          acc[endpoint] =
-            paths[path].post.requestBody.content["application/json"].schema;
+          acc[endpoint] = paths[path].post.requestBody.content["application/json"].schema;
+          const tags = paths[path].post?.tags || ["Uncategorized"];
+          tags.forEach((tag) => {
+            if (!grouped[tag]) {
+              grouped[tag] = {};
+            }
+            grouped[tag][path] = endpoint;
+          });
         }
+        console.log("grouped");
+        console.log(grouped);
         return acc;
       }, {});
       setEndpoints(endpoints);
+      console.log("grouped (outside)");
+      console.log(grouped);
+      setGroupedEndpoints(grouped);
       console.log("ENDPOINTS");
       console.log(endpoints);
 
@@ -91,6 +113,8 @@ function App() {
       setLoading(false);
       console.log("MODELS");
       console.log(models);
+      // console.log("groupedEndpoints");
+      // console.log(groupedEndpoints);
     };
     fetchEndpoints();
   }, []);
@@ -136,6 +160,14 @@ function App() {
           ? checked
           : value,
     }));
+  };
+
+  const handleCategoryClick = (category) => {
+    if (openCategory === category) {
+      setOpenCategory(null);
+    } else {
+      setOpenCategory(category);
+    }
   };
 
   const handleSubmit = async () => {
@@ -258,7 +290,8 @@ function App() {
       </ThemeProvider>
     );
   }
-
+  console.log("groupedEndpoints (just before)");
+  console.log(groupedEndpoints);
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -277,25 +310,67 @@ function App() {
           },
         }}
       >
+
+        {/*<Grid item xs={2}>*/}
+        {/*  <Item sx={{ py: 2, px: 2 }}>*/}
+        {/*    <Typography variant="h4" component="h1" gutterBottom>*/}
+        {/*      File type*/}
+        {/*    </Typography>*/}
+        {/*    <List component="nav" aria-label="main providers folders">*/}
+        {/*      {endpoints &&*/}
+        {/*        Object.keys(endpoints).map((endpoint) => (*/}
+        {/*          <ListItemButton*/}
+        {/*            key={endpoint}*/}
+        {/*            selected={selectedEndpoint === endpoint}*/}
+        {/*            onClick={() => handleEndpointClick(endpoint)}*/}
+        {/*          >*/}
+        {/*            <ListItemText primary={endpoint.split("_file")[0].replace(/_/g, " ")} />*/}
+        {/*          </ListItemButton>*/}
+        {/*        ))}*/}
+        {/*    </List>*/}
+        {/*  </Item>*/}
+        {/*</Grid>*/}
+
         <Grid item xs={2}>
-          <Item sx={{ py: 2, px: 2 }}>
-            <Typography variant="h4" component="h1" gutterBottom>
+          <Item sx={{ py: 0, px: 0 }}>
+            <Typography variant="h4" component="h1" gutterBottom  sx={{ pt: 2, pl: 2, pb: 0, pr: 0 }}>
               File type
             </Typography>
             <List component="nav" aria-label="main providers folders">
-              {endpoints &&
-                Object.keys(endpoints).map((endpoint) => (
-                  <ListItemButton
-                    key={endpoint}
-                    selected={selectedEndpoint === endpoint}
-                    onClick={() => handleEndpointClick(endpoint)}
-                  >
-                    <ListItemText primary={endpoint.split("_file")[0].replace(/_/g, " ")} />
-                  </ListItemButton>
+              {groupedEndpoints &&
+                Object.keys(groupedEndpoints).map((category) => (
+                  <>
+                    <ListItemButton
+                      key={category}
+                      onClick={() => handleCategoryClick(category)}
+                      className="category"
+                    >
+                      <ListItemText primary={category}/>
+                    </ListItemButton>
+                    <Collapse in={openCategory === category} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        {Object.keys(groupedEndpoints[category]).map((endpointPath) => {
+                          const endpoint = groupedEndpoints[category][endpointPath];
+                          return (
+                            <ListItemButton
+                              key={endpoint}
+                              sx={{ pl: 4, pr: 0, pb: 0, pt: 0 }}
+                              selected={selectedEndpoint === endpoint}
+                              onClick={() => handleEndpointClick(endpoint)}
+                              className="subcategory"
+                            >
+                              <ListItemText primary={endpoint.split("_file")[0].replace(/_/g, " ")} />
+                            </ListItemButton>
+                          );
+                        })}
+                      </List>
+                    </Collapse>
+                  </>
                 ))}
             </List>
           </Item>
         </Grid>
+
         <Grid item xs={8}>
           <Item sx={{ py: 2, px: 2 }}>
             <Typography variant="h4" component="h1" gutterBottom>
