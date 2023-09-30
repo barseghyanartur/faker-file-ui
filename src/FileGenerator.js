@@ -310,6 +310,7 @@ function App() {
           },
         }}
       >
+
         {/*<Grid item xs={2}>*/}
         {/*  <Item sx={{ py: 2, px: 2 }}>*/}
         {/*    <Typography variant="h4" component="h1" gutterBottom>*/}
@@ -327,71 +328,6 @@ function App() {
         {/*          </ListItemButton>*/}
         {/*        ))}*/}
         {/*    </List>*/}
-        {/*  </Item>*/}
-        {/*</Grid>*/}
-
-        {/*<Grid item xs={2}>*/}
-        {/*  <Item sx={{ py: 2, px: 2 }}>*/}
-        {/*    <Typography variant="h4" component="h1" gutterBottom>*/}
-        {/*      File type*/}
-        {/*    </Typography>*/}
-        {/*    <List component="nav" aria-label="main providers folders">*/}
-        {/*      {groupedEndpoints && Object.keys(groupedEndpoints).map((tag) => (*/}
-        {/*        <React.Fragment key={tag}>*/}
-        {/*          <ListItem>*/}
-        {/*            <ListItemText primary={tag} />*/}
-        {/*          </ListItem>*/}
-        {/*          {Object.keys(groupedEndpoints[tag]).map((endpointPath) => {*/}
-        {/*            const endpointName = groupedEndpoints[tag][endpointPath];*/}
-        {/*            return (*/}
-        {/*              <ListItemButton*/}
-        {/*                key={endpointName}*/}
-        {/*                selected={selectedEndpoint === endpointName}*/}
-        {/*                onClick={() => handleEndpointClick(endpointName)}*/}
-        {/*                style={{ paddingLeft: '32px' }}*/}
-        {/*              >*/}
-        {/*                <ListItemText primary={endpointName.split("_file")[0].replace(/_/g, " ")} />*/}
-        {/*              </ListItemButton>*/}
-        {/*            );*/}
-        {/*          })}*/}
-        {/*        </React.Fragment>*/}
-        {/*      ))}*/}
-        {/*    </List>*/}
-        {/*  </Item>*/}
-        {/*</Grid>*/}
-
-        {/*<Grid item xs={2}>*/}
-        {/*  <Item sx={{ py: 2, px: 2 }}>*/}
-        {/*    <Typography variant="h4" component="h1" gutterBottom>*/}
-        {/*      File type*/}
-        {/*    </Typography>*/}
-        {/*    {groupedEndpoints && Object.keys(groupedEndpoints).map((tag) => (*/}
-        {/*      <Accordion key={tag}>*/}
-        {/*        <AccordionSummary*/}
-        {/*          expandIcon={<ExpandMoreIcon />}*/}
-        {/*          aria-controls="panel1a-content"*/}
-        {/*          id="panel1a-header"*/}
-        {/*        >*/}
-        {/*          <Typography>{tag}</Typography>*/}
-        {/*        </AccordionSummary>*/}
-        {/*        <AccordionDetails>*/}
-        {/*          <List component="div" disablePadding>*/}
-        {/*            {Object.keys(groupedEndpoints[tag]).map((endpointPath) => {*/}
-        {/*              const endpointName = groupedEndpoints[tag][endpointPath];*/}
-        {/*              return (*/}
-        {/*                <ListItemButton*/}
-        {/*                  key={endpointName}*/}
-        {/*                  selected={selectedEndpoint === endpointName}*/}
-        {/*                  onClick={() => handleEndpointClick(endpointName)}*/}
-        {/*                >*/}
-        {/*                  <ListItemText primary={endpointName.split("_file")[0].replace(/_/g, " ")} />*/}
-        {/*                </ListItemButton>*/}
-        {/*              );*/}
-        {/*            })}*/}
-        {/*          </List>*/}
-        {/*        </AccordionDetails>*/}
-        {/*      </Accordion>*/}
-        {/*    ))}*/}
         {/*  </Item>*/}
         {/*</Grid>*/}
 

@@ -2,81 +2,165 @@
  * Webp is disabled.
 */
 const providers = {
-  bin: ["basename", "prefix", "length", "content"],
-  csv: [
-    "basename",
-    "prefix",
-    "header",
-    "data_columns",
-    "num_rows",
-    "content",
-    "encoding",
-  ],
-  docx: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  eml: [
-    "basename",
-    "prefix",
-    "options",
-    "max_nb_chars",
-    "wrap_chars_after",
-    "content",
-  ],
-  epub: [
-    "basename",
-    "prefix",
-    "max_nb_chars",
-    "wrap_chars_after",
-    "content",
-    "title",
-    "chapter_title",
-  ],
-  generic: ["content", "extension", "basename", "prefix"],
-  "graphic ico": ["size", "hue", "luminosity", "basename", "prefix"],
-  "graphic jpeg": ["size", "hue", "luminosity", "basename", "prefix"],
-  "graphic pdf": ["size", "hue", "luminosity", "basename", "prefix"],
-  "graphic png": ["size", "hue", "luminosity", "basename", "prefix"],
-  "graphic webp": ["size", "hue", "luminosity", "basename", "prefix"],
-  ico: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  jpeg: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  mp3: [
-    "basename",
-    "prefix",
-    "max_nb_chars",
-    "content",
-    "mp3_generator_cls",
-    "mp3_generator_kwargs",
-  ],
-  odp: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  ods: ["basename", "prefix", "data_columns", "num_rows", "content"],
-  odt: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  pdf: [
-    "basename",
-    "prefix",
-    "max_nb_chars",
-    "wrap_chars_after",
-    "content",
-    "pdf_generator_cls",
-    "pdf_generator_kwargs",
-  ],
-  png: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  pptx: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  rtf: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  svg: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  tar: ["basename", "prefix", "options", "compression"],
-  txt: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  // webp: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
-  xlsx: ["basename", "prefix", "data_columns", "num_rows", "content"],
-  xml: [
-    "basename",
-    "prefix",
-    "root_element",
-    "row_element",
-    "data_columns",
-    "num_rows",
-    "content",
-    "encoding",
-  ],
-  zip: ["basename", "prefix", "options"],
+  bin: {
+    category: "Binary",
+    fields: ["basename", "prefix", "length", "content"],
+  },
+  csv: {
+    category: "Spreadsheet",
+    fields: [
+      "basename",
+      "prefix",
+      "header",
+      "data_columns",
+      "num_rows",
+      "content",
+      "encoding",
+    ],
+  },
+  docx: {
+    category: "Rich Text",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  eml: {
+    category: "Archive",
+    fields: [
+      "basename",
+      "prefix",
+      "options",
+      "max_nb_chars",
+      "wrap_chars_after",
+      "content",
+    ],
+  },
+  epub: {
+    category: "Publishing",
+    fields: [
+      "basename",
+      "prefix",
+      "max_nb_chars",
+      "wrap_chars_after",
+      "content",
+      "title",
+      "chapter_title",
+    ],
+  },
+  generic: {
+    category: "Generic",
+    fields: ["content", "extension", "basename", "prefix"],
+  },
+  "graphic ico": {
+    category: "Image",
+    fields: ["size", "hue", "luminosity", "basename", "prefix"],
+  },
+  "graphic jpeg": {
+    category: "Image",
+    fields: ["size", "hue", "luminosity", "basename", "prefix"],
+  },
+  "graphic pdf": {
+    category: "Publishing",
+    fields: ["size", "hue", "luminosity", "basename", "prefix"]
+  },
+  "graphic png": {
+    category: "Image",
+    fields: ["size", "hue", "luminosity", "basename", "prefix"],
+  },
+  "graphic webp": {
+    category: "Image",
+    fields: ["size", "hue", "luminosity", "basename", "prefix"],
+  },
+  ico: {
+    category: "Image",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  jpeg: {
+    category: "Image",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  mp3: {
+    category: "Audio",
+    fields: [
+      "basename",
+      "prefix",
+      "max_nb_chars",
+      "content",
+      "mp3_generator_cls",
+      "mp3_generator_kwargs",
+    ],
+  },
+  odp: {
+    category: "Presentation",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  ods: {
+    category: "Spreadsheet",
+    fields: ["basename", "prefix", "data_columns", "num_rows", "content"],
+  },
+  odt: {
+    category: "Rich Text",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  pdf: {
+    category: "Publishing",
+    fields: [
+      "basename",
+      "prefix",
+      "max_nb_chars",
+      "wrap_chars_after",
+      "content",
+      "pdf_generator_cls",
+      "pdf_generator_kwargs",
+    ],
+  },
+  png: {
+    category: "Image",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  pptx: {
+    category: "Presentation",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  rtf: {
+    category: "Rich Text",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  svg: {
+    category: "Image",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  tar: {
+    category: "Archive",
+    fields: ["basename", "prefix", "options", "compression"],
+  },
+  txt: {
+    category: "Text",
+    fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  },
+  // webp: {
+  //   category: "Image",
+  //   fields: ["basename", "prefix", "max_nb_chars", "wrap_chars_after", "content"],
+  // },
+  xlsx: {
+    category: "Spreadsheet",
+    fields: ["basename", "prefix", "data_columns", "num_rows", "content"],
+  },
+  xml: {
+    category: "Data",
+    fields: [
+      "basename",
+      "prefix",
+      "root_element",
+      "row_element",
+      "data_columns",
+      "num_rows",
+      "content",
+      "encoding",
+    ],
+  },
+  zip: {
+    category: "Archive",
+    fields: ["basename", "prefix", "options"],
+  },
 };
 
 /**
@@ -170,13 +254,14 @@ describe("Faker File UI", () => {
     cy.wait("@fetchEndpoints");
   });
 
-  Object.entries(providers).forEach(([provider, fields]) => {
+  Object.entries(providers).forEach(([provider, data]) => {
     it(`loads the form for ${provider}`, () => {
-      cy.get("div.category").contains("span", new RegExp(`^${provider}$`)).click();
+      cy.get("div.category").contains("span", new RegExp(`^${data["category"]}$`)).click();
+      cy.get("div.subcategory").contains("span", new RegExp(`^${provider}$`)).click();
       cy.window().then((win) => {
         win.scrollTo(0, 0)
       });
-      fields.forEach((field) => {
+      data["fields"].forEach((field) => {
         if (selects.includes(field)) {
           // Special handling for the select fields
           cy.get(`[name="${field}"]`).should('exist');
@@ -189,7 +274,7 @@ describe("Faker File UI", () => {
 });
 
 describe("Submit form data and get file download link", () => {
-  Object.entries(providers).forEach(([provider, fields]) => {
+  Object.entries(providers).forEach(([provider, data]) => {
     it(`submits the form for ${provider}`, () => {
       // Visit the site
       cy.visit("http://127.0.0.1:3000");
@@ -198,10 +283,16 @@ describe("Submit form data and get file download link", () => {
       }).as("fetchEndpoints");
       cy.wait("@fetchEndpoints");
 
-      cy.get("div.category").contains("span", provider).click();
-      // fields.forEach((field) => {
-      //   cy.get(`[name="${field}"]`).should("be.visible");
-      // });
+      cy.get("div.category").contains("span", new RegExp(`^${data["category"]}$`)).click();
+      cy.get("div.subcategory").contains("span", new RegExp(`^${provider}$`)).click();
+      data["fields"].forEach((field) => {
+        if (selects.includes(field)) {
+          // Special handling for the select fields
+          cy.get(`[name="${field}"]`).should('exist');
+        } else {
+          cy.get(`[name="${field}"]`).should('be.visible');
+        }
+      });
 
       // Fill in the form and submit it
       const values = formValues[provider];
@@ -213,11 +304,12 @@ describe("Submit form data and get file download link", () => {
             : values[field];
         cy.get(`[name="${field}"]`).type(value, {
           parseSpecialCharSequences: false,
+          force: true,
         });
       }
 
       const extension = values["extension"] ? values["extension"] : provider;
-      cy.intercept("POST", `http://127.0.0.1:8000/${provider}_file/`, {
+      cy.intercept("POST", `http://127.0.0.1:8000/${provider.replace(/ /g, "_")}_file/`, {
         fixture: "download.json",
         headers: {
           "Content-Disposition": `attachment; filename=test.${extension}`,
